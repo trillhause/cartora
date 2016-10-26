@@ -28,10 +28,16 @@ group :development, :test do
   gem 'byebug', platform: :mri
 
   # Use RSpec for specs
-  gem 'rspec-rails', '3.1.0'
+  gem 'rspec-rails'
 
   # Use Factory Girl for generating random test data
   gem 'factory_girl_rails'
+
+  gem 'ffaker'
+end
+
+group :test do
+  gem 'shoulda-matchers'
 end
 
 group :development do

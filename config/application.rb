@@ -28,7 +28,7 @@ module Traveltime
     config.api_only = true
 
     #Configure Cross-Origin Resource Sharing (CORS)
-    config.middleware.insert_before 0, "Rack::Cors" do
+    config.middleware.insert_before 0, Rack::Cors do
       allow do
         origins '*'
         resource '*', :headers => :any, :methods => [:get, :post, :options]
