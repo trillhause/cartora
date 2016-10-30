@@ -11,6 +11,9 @@ gem 'puma', '~> 3.0'
 gem 'active_model_serializers'
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 gem 'rack-cors'
+
+gem 'rb-readline'
+
 # Devise gem for authentication
 gem 'devise'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
