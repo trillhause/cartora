@@ -43,6 +43,11 @@ RSpec.configure do |config|
 
   #Including to test requests
   config.include Request::JsonHelpers, type: :controller
+  config.include Request::HeadersHelpers, type: :controller
+
+  config.before(:each, type: :controller) do
+    include_default_accept_headers
+  end
 
 # The settings below are suggested to provide a good initial experience
 # with RSpec, but feel free to customize to your heart's content.
