@@ -2,10 +2,6 @@ require 'rails_helper'
 require 'api_constraints'
 
 RSpec.describe Api::V1::UsersController, type: :controller do
-  # before(:each) do
-  #   request.headers['Accept'] = "application/vnd.traveltime.v1 ,  #{Mime[:json]}"
-  #   request.headers['Content-Type'] = Mime[:json].to_s
-  # end
 
   describe "GET #show" do
     before(:each) do

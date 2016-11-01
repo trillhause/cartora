@@ -49,9 +49,7 @@ RSpec.configure do |config|
   # https://relishapp.com/rspec/rspec-rails/docs
   config.infer_spec_type_from_file_location!
 
-  RSpec.configure do |config|
-    config.include Devise::Test::ControllerHelpers, type: :controller
-  end
+  config.include Devise::Test::ControllerHelpers, type: :controller
 
   Shoulda::Matchers.configure do |config|
     config.integrate do |with|
