@@ -1,5 +1,4 @@
 require 'rails_helper'
-require 'api_constraints'
 
 RSpec.describe Api::V1::SessionsController, type: :controller do
   describe "POST #create" do
