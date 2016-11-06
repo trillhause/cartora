@@ -10,7 +10,6 @@ module Authenticable
   end
 
   def user_signed_in?
-    byebug
     current_user.present?
   end
 end
