@@ -89,6 +89,7 @@ GEM
     nokogiri (1.6.8.1)
       mini_portile2 (~> 2.1.0)
     orm_adapter (0.5.0)
+    pg (0.19.0)
     puma (3.6.0)
     rack (2.0.1)
     rack-cors (0.4.0)
@@ -180,6 +181,7 @@ DEPENDENCIES
   ffaker
   listen (~> 3.0.5)
   mysql2
+  pg
   puma (~> 3.0)
   rack-cors
   rails (~> 5.0.0, >= 5.0.0.1)
