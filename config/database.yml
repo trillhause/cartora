@@ -7,14 +7,14 @@
 default: &default
   adapter: mysql2
   encoding: utf8
-  reconnect: false
-  username: root
-  password:
-  pool: 5
-  timeout: 5000
 
 development:
   <<: *default
+  username: root
+  password:
+  reconnect: false
+  pool: 5
+  timeout: 5000
   database: traveltime_development
 
 # Warning: The database defined as "test" will be erased and
@@ -22,6 +22,7 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
+  username: travis
   database: traveltime_test
 
 production:

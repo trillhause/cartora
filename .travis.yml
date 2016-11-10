@@ -12,4 +12,4 @@ services:
   - mysql
 
 before_script:
-  - mysql -e 'create database travetime_test;'
+  - mysql -e 'create database traveltime_test;'
