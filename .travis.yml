@@ -1,9 +1,22 @@
 language: ruby
 rvm:
  - 2.3.0-p0
- 
+
 notifications:
   email: false
 
+services:
+  - mysql
+
+before_script:
+  - mysql -e 'create database traveltime_test;'
+
 # uncomment and edit the following line if your project needs to run something other than `rake`:
 script: bundle exec rspec spec
+
+deploy:
+  provider: heroku
+  api_key:
+    secure: c7f699c4-5f41-4f10-9139-1ff661485640
+  app: travel-time
+  on: master

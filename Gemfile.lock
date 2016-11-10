@@ -84,10 +84,12 @@ GEM
     mime-types-data (3.2016.0521)
     mini_portile2 (2.1.0)
     minitest (5.9.1)
+    mysql2 (0.4.5)
     nio4r (1.2.1)
     nokogiri (1.6.8.1)
       mini_portile2 (~> 2.1.0)
     orm_adapter (0.5.0)
+    pg (0.19.0)
     puma (3.6.0)
     rack (2.0.1)
     rack-cors (0.4.0)
@@ -164,6 +166,9 @@ GEM
     websocket-driver (0.6.4)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.2)
+    yaml_db (0.4.2)
+      rails (>= 3.0, < 5.1)
+      rake (>= 0.8.7)
 
 PLATFORMS
   ruby
@@ -175,6 +180,8 @@ DEPENDENCIES
   factory_girl_rails
   ffaker
   listen (~> 3.0.5)
+  mysql2
+  pg
   puma (~> 3.0)
   rack-cors
   rails (~> 5.0.0, >= 5.0.0.1)
@@ -185,6 +192,7 @@ DEPENDENCIES
   spring-watcher-listen (~> 2.0.0)
   sqlite3
   tzinfo-data
+  yaml_db
 
 BUNDLED WITH
    1.13.1
