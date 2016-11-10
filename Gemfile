@@ -9,6 +9,8 @@ gem 'rack-cors'
 gem 'rb-readline'
 gem 'devise'
 
+gem 'yaml_db'
+
 group :development, :test do
   gem 'byebug', platform: :mri
   gem 'rspec-rails'
@@ -16,6 +18,8 @@ group :development, :test do
   gem 'ffaker'
   gem 'sqlite3'
   gem 'shoulda-matchers'
+
+  gem 'mysql2'
 end
 
 group :development do
