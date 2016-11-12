@@ -55,3 +55,8 @@ bower.json
 
 # Ignore idea/workspace.xml
 .idea/workspace.xml
+.idea/codeStyleSettings.xml
+
+# Database backup
+config.database.yml.sqlite3
+db/data.yml
