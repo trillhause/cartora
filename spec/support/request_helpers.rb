@@ -7,7 +7,7 @@ module Request
 
   module HeadersHelpers
     def api_header(version = 1)
-      request.headers['Accept'] = 'application/vnd.traveltime.v#{version}'
+      request.headers['Accept'] = "application/vnd.traveltime.v#{version}"
     end
 
     def api_authorization_header(token)

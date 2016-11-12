@@ -20,7 +20,7 @@ RSpec.describe Api::V1::UsersController, type: :controller do
     context "when successfully created" do
       before(:each) do
         @user_attributes = FactoryGirl.attributes_for  :user
-        post :create, params: {user: @user_attributes}, format: :user
+        post :create, params: {user: @user_attributes}
       end
 
       it "renders the json representation for the user record just created" do
