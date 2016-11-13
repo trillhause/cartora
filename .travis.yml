@@ -20,3 +20,6 @@ deploy:
   app: travel-time
   on:
     repo: millingab/traveltime-s
+
+notifications:
+  slack: travel-time:ShZgu6cz2iPyVLKlTEinHgqH
