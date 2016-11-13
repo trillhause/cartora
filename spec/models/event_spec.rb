@@ -13,8 +13,9 @@ RSpec.describe Event, type: :model do
   it { should validate_presence_of :name }
   it { should validate_presence_of :start_time }
   it { should validate_presence_of :end_time }
+  it { should be_valid}
 
-  it  { should be_valid}
+  it { should belong_to(:organiser).class_name('User').with_foreign_key('organiser_id') }
 
   describe 'when start_time is after end_time' do
     before do
