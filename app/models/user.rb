@@ -6,7 +6,7 @@ class User < ApplicationRecord
   validates :first_name, :last_name, presence: true
   before_create :generate_authentication_token!
 
-  has_many :events, foreign_key: :organiser_id
+  has_many :events, foreign_key: :organiser_id, dependent: :destroy
 
   def generate_authentication_token!
     begin

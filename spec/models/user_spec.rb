@@ -40,4 +40,19 @@ RSpec.describe User, type: :model do
       expect(@user.auth_token).not_to eql existing_user.auth_token
     end
   end
+
+  describe '#events association' do
+    before do
+      @user.save
+      3.times { FactoryGirl.create :event, organiser: @user }
+    end
+
+    it 'destroys the associated product on self.destruct' do
+      events = @user.events
+      @user.destroy
+      events.each do |event|
+        expect(Event.find(event)).to raise_error ActiveRecord::RecordNotFound
+      end
+    end
+  end
 end
