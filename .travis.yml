@@ -20,6 +20,7 @@ deploy:
   app: travel-time
   on:
     repo: millingab/traveltime-s
+  run: "rake db:migrate"
 
 notifications:
   slack: travel-time:ShZgu6cz2iPyVLKlTEinHgqH
