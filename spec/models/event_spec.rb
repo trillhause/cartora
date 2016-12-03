@@ -24,4 +24,20 @@ RSpec.describe Event, type: :model do
     end
     it { should be_invalid }
   end
+
+  describe '#participation association' do
+    before do
+      event.save
+      3.times { FactoryGirl.create :participation, user: FactoryGirl.build(:user), event: event }
+    end
+
+    it 'destroys all participation record for event when event is destroyed' do
+      participations = event.participations
+      event.destroy
+      participations.each do |participant|
+        byebug
+        expect(Participation.find(participant)).to raise_error ActiveRecord::RecordNotFound
+      end
+    end
+  end
 end

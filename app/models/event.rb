@@ -4,6 +4,8 @@ class Event < ApplicationRecord
   validates :start_time, :end_time, presence: true
   validate :start_time_is_before_end_time
 
+  has_many :users, through: :participations
+  has_many :participations, dependent: :destroy
   belongs_to :host, class_name: 'User', foreign_key: :host_id
 
   private
