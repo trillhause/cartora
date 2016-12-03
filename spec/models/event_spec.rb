@@ -1,21 +1,21 @@
 require 'rails_helper'
 
 RSpec.describe Event, type: :model do
-
   let(:event) { FactoryGirl.build :event }
   subject { event }
 
-  it { should respond_to :name}
-  it { should respond_to :start_time}
-  it { should respond_to :end_time}
-  it { should respond_to :organiser_id}
+  it { should respond_to :name }
+  it { should respond_to :start_time }
+  it { should respond_to :end_time }
+  it { should respond_to :host_id }
 
   it { should validate_presence_of :name }
+  it { should validate_presence_of :host_id }
   it { should validate_presence_of :start_time }
   it { should validate_presence_of :end_time }
-  it { should be_valid}
+  it { should be_valid }
 
-  it { should belong_to(:organiser).class_name('User').with_foreign_key('organiser_id') }
+  it { should belong_to(:host).class_name('User').with_foreign_key('host_id') }
 
   describe 'when start_time is after end_time' do
     before do

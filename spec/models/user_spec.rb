@@ -17,7 +17,7 @@ RSpec.describe User, type: :model do
   it { should validate_presence_of :first_name }
   it { should validate_presence_of :last_name }
 
-  it { should have_many(:events) }
+  it { should have_many(:hosting) }
 
   describe "when email is not present" do
     before { @user.email = " " }
@@ -41,16 +41,16 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe '#events association' do
+  describe '#hosting association' do
     before do
       @user.save
-      3.times { FactoryGirl.create :event, organiser: @user }
+      3.times { FactoryGirl.create :event, host: @user }
     end
 
-    it 'destroys the associated product on self.destruct' do
-      events = @user.events
+    it 'destroys all events hosted by the user when user is destroyed' do
+      hosting = @user.hosting
       @user.destroy
-      events.each do |event|
+      hosting.each do |event|
         expect(Event.find(event)).to raise_error ActiveRecord::RecordNotFound
       end
     end

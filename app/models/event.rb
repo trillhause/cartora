@@ -1,9 +1,10 @@
 class Event < ApplicationRecord
   validates :name, presence: true
+  validates :host_id, presence: true
   validates :start_time, :end_time, presence: true
   validate :start_time_is_before_end_time
 
-  belongs_to :organiser, class_name: 'User', foreign_key: :organiser_id
+  belongs_to :host, class_name: 'User', foreign_key: :host_id
 
   private
 
