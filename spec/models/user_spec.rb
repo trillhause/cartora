@@ -19,7 +19,7 @@ RSpec.describe User, type: :model do
 
   it { should have_many(:hosting) }
 
-  describe "when email is not present" do
+  describe 'when email is not present' do
     before { @user.email = " " }
     it { should validate_presence_of(:email) }
     it { should validate_uniqueness_of(:email).ignoring_case_sensitivity }
@@ -34,7 +34,7 @@ RSpec.describe User, type: :model do
       expect(@user.auth_token).to eql "auniquetoken123"
     end
 
-    it "generates another token when one already has been taken" do
+    it 'generates another token when one already has been taken' do
       existing_user = FactoryGirl.create(:user, auth_token: "anuniquetoken123")
       @user.generate_authentication_token!
       expect(@user.auth_token).not_to eql existing_user.auth_token

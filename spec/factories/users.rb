@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :user do
-    id { FFaker::PhoneNumber.area_code }
+    id { rand(100000) }
     first_name { FFaker::Name.first_name }
     last_name { FFaker::Name.last_name }
     email { FFaker::Internet.email }

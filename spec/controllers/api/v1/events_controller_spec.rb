@@ -10,15 +10,92 @@ RSpec.describe Api::V1::EventsController, type: :controller do
       get :show, params: { user_id: @user.id ,id: @event.id }
     end
 
-    it "returns the information about a reporter on a hash" do
+    it 'returns the information about event' do
       expect(json_response[:name]).to eql @event.name
     end
 
     it { should respond_with :ok }
   end
 
+  describe 'GET #index' do
+    before(:each) do
+      @user = FactoryGirl.create :user
+      2.times { FactoryGirl.create :event, host: @user }
+      2.times { FactoryGirl.create :participation, user: @user }
+      api_authorization_header @user.auth_token
+      get :index, params: { user_id: @user.id }
+    end
+
+    it 'renders response with correct from the database' do
+      expect(json_response.count).to eq(4)
+    end
+  end
+
+  describe 'GET #hosting' do
+    before(:each) do
+      @user = FactoryGirl.create :user
+      4.times { FactoryGirl.create :event, host: @user }
+      api_authorization_header @user.auth_token
+      get :hosting, params: { user_id: @user.id }
+    end
+
+    it 'renders response with correct from the database' do
+      expect(json_response.count).to eq(4)
+    end
+  end
+
+  describe 'GET #attending' do
+    before(:each) do
+      @user = FactoryGirl.create :user
+      4.times { FactoryGirl.create :participation, user: @user }
+      @user.participations.each do |p|
+        p.update(attending: true)
+      end
+      api_authorization_header @user.auth_token
+      get :attending, params: { user_id: @user.id }
+    end
+
+    it 'renders response with correct from the database' do
+      expect(json_response.count).to eq(4)
+    end
+  end
+
+  describe 'GET #invited' do
+    before(:each) do
+      @user = FactoryGirl.create :user
+      4.times { FactoryGirl.create :participation, user: @user }
+      api_authorization_header @user.auth_token
+      get :invited, params: { user_id: @user.id }
+    end
+
+    it 'renders response with correct from the database' do
+      expect(json_response.count).to eq(4)
+    end
+  end
+
   describe 'POST #create' do
-    context 'when is successfully created' do
+    context 'when is successfully created with participants' do
+      before :each do
+        @user = FactoryGirl.create :user
+        p1 = FactoryGirl.create :user
+        p2 = FactoryGirl.create :user
+        @event_attributes = FactoryGirl.attributes_for :event, participants: [ {id: p1.id} ,{id: p2.id} ]
+        api_authorization_header @user.auth_token
+        post :create, params: { user_id: @user.id, event: @event_attributes }
+      end
+
+      it 'renders the json representation for the event record' do
+        expect(json_response[:name]).to eql @event_attributes[:name]
+      end
+
+      it 'renders the two participants in the response' do
+        expect(json_response[:participants].count).to eql 2
+      end
+
+      it { should respond_with :created }
+    end
+
+    context 'when is successfully created without participants' do
       before :each do
         @user = FactoryGirl.create :user
         @event_attributes = FactoryGirl.attributes_for :event
