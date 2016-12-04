@@ -6,6 +6,10 @@ class User < ApplicationRecord
   validates :first_name, :last_name, presence: true
   before_create :generate_authentication_token!
 
+  has_many :events, through: :participations
+  has_many :participations, dependent: :destroy
+  has_many :hosting, class_name: 'Event', foreign_key: :host_id, dependent: :destroy
+
   def generate_authentication_token!
     begin
       self.auth_token = Devise.friendly_token

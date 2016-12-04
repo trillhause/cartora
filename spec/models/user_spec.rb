@@ -13,9 +13,11 @@ RSpec.describe User, type: :model do
   it { should respond_to :last_name }
 
   it { should be_valid }
-  it { should validate_uniqueness_of(:auth_token)}
-  it { should validate_presence_of(:first_name) }
-  it { should validate_presence_of(:last_name) }
+  it { should validate_uniqueness_of :auth_token }
+  it { should validate_presence_of :first_name }
+  it { should validate_presence_of :last_name }
+
+  it { should have_many(:hosting) }
 
   describe "when email is not present" do
     before { @user.email = " " }
@@ -36,6 +38,37 @@ RSpec.describe User, type: :model do
       existing_user = FactoryGirl.create(:user, auth_token: "anuniquetoken123")
       @user.generate_authentication_token!
       expect(@user.auth_token).not_to eql existing_user.auth_token
+    end
+  end
+
+  describe '#hosting association' do
+    before do
+      @user.save
+      3.times { FactoryGirl.create :event, host: @user }
+    end
+
+    it 'destroys all events hosted by the user when user is destroyed' do
+      hosting = @user.hosting
+      @user.destroy
+      hosting.each do |event|
+        expect(Event.find(event)).to raise_error ActiveRecord::RecordNotFound
+      end
+    end
+  end
+
+  describe '#participation association' do
+    before do
+      @user.save
+      3.times { FactoryGirl.create :participation, user: @user, event: FactoryGirl.build(:event) }
+    end
+
+    it 'destroys all participation record of user when user is destroyed' do
+      participations = @user.participations
+      @user.destroy
+      participations.each do |participant|
+        byebug
+        expect(Participation.find(participant)).to raise_error ActiveRecord::RecordNotFound
+      end
     end
   end
 end
