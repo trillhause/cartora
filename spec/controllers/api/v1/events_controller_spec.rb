@@ -6,7 +6,8 @@ RSpec.describe Api::V1::EventsController, type: :controller do
     before(:each) do
       @user = FactoryGirl.create :user
       @event = FactoryGirl.create :event, host: @user
-      get :show, params: { id: @event.id }
+      api_authorization_header @user.auth_token
+      get :show, params: { user_id: @user.id ,id: @event.id }
     end
 
     it "returns the information about a reporter on a hash" do
