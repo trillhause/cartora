@@ -11,7 +11,6 @@ RSpec.describe Api::V1::EventsController, type: :controller do
 
     it "returns the information about a reporter on a hash" do
       expect(json_response[:name]).to eql @event.name
-      expect(json_response[:host_id]).to eql @user.id
     end
 
     it { should respond_with :ok }
@@ -28,7 +27,6 @@ RSpec.describe Api::V1::EventsController, type: :controller do
 
       it 'renders the json representation for the event record just created' do
         expect(json_response[:name]).to eql @event_attributes[:name]
-        expect(json_response[:host_id]).to eql @user.id
       end
 
       it { should respond_with :created }

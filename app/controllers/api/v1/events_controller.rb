@@ -2,7 +2,7 @@ class Api::V1::EventsController < ApplicationController
   before_action :authenticate_with_token!, only: [:create, :update]
 
   def show
-    render json: Event.find(params[:id])
+    render json: Event.find(params[:id]), serializer: EventWithParticipantsSerializer
   end
 
   def create

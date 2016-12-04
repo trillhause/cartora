@@ -3,7 +3,7 @@ class Api::V1::UsersController < ApplicationController
   respond_to :json
 
   def show
-    respond_with User.find(params[:id])
+    respond_with User.find(params[:id]), serializer: UserpublicSerializer
   end
 
   def create
