@@ -31,9 +31,9 @@ class Api::V1::EventsController < ApplicationController
     event = current_user.hosting.build(event_params)
     if event.save
 
-      params[:event][:participants].each do |user|
+      params[:participants].each do |user|
         event.participations.build(user_id: user[:id]).save
-      end unless params[:event][:participants].nil?
+      end unless params[:participants].nil?
 
       render json: event,
              status: :created,
@@ -49,9 +49,9 @@ class Api::V1::EventsController < ApplicationController
     event = current_user.hosting.find(params[:id])
 
     event.participations.destroy_all
-    params[:event][:participants].each do |user|
+    params[:participants].each do |user|
       event.participations.build(user_id: user[:id]).save
-    end unless params[:event][:participants].nil?
+    end unless params[:participants].nil?
 
     if event.update(event_params)
       render json: event,
@@ -73,6 +73,6 @@ class Api::V1::EventsController < ApplicationController
   private
 
   def event_params
-    params.require(:event).permit(:name,:start_time,:end_time)
+    params.permit(:name,:start_time,:end_time)
   end
 end
