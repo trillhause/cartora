@@ -1,3 +1,3 @@
-# TravelTime API
+# Cartora API
 
-Welcome to TravelTime API
+Welcome to Cartora API

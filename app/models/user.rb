@@ -8,6 +8,8 @@ class User < ApplicationRecord
 
   has_many :events, through: :participations
   has_many :participations, dependent: :destroy
+  has_many :attending, -> { where(attending: true) }, :class_name => 'Participation'
+  has_many :invited, -> { where(attending: false) }, :class_name => 'Participation'
   has_many :hosting, class_name: 'Event', foreign_key: :host_id, dependent: :destroy
 
   def generate_authentication_token!
