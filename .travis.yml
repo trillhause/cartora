@@ -17,7 +17,7 @@ deploy:
   provider: heroku
   api_key:
     secure: Nd6brEvneDCwkvdAjfsd9IQyzL1jNpFUOKcEJBusBX6s+fV7T+PBMpOEjYTgtzZvRtpFLR7AJPlFi/d4I85X0dlSlHhftxNw11h8cUZDBPzRU1mvwDbJDUaNBJSW4cL2WNmuu0M2mpfyZZ4//adEYRrN5F7m2RmNLyh4qK8s8sk0APh+NcIDWgRVRVjlwjmhnZrZEFvM1d3omCDFzlyhz7wJEQ4MGg8myDjcbsy3HFrjWzCws2w5rKguua+uozjadUZTU6Chot4V92i4cw2j4kX03nj8eNN+Z31GsUId9b8fZM9dDvHyVRmbht5RbJQWqLwNcKnf/4Rr/82lp7lOEmiF2GCh+L7mv4uoYaLhXfX/COGMubpks6rdoztVNcWrMXpHlDpUZpWyxOigSyyv2iLKuQZiU0G3JSkX9GACMwHVVDDIdJnwpfRTXnYbyfbuPw395lkOju/XeuiukHSeVda5snnt0aXQrjkXCwjlr0zUOVQPd74OJWu/28rrxcgWAVMRUeqTMMp9L7PsSSRM49c8vEOAqsh3Wt6FD066Pjb55SBT08X97zuk2AQAT/LSkpbQkNi/O9C3CEG1+KKW40rYuZtcPPxm3AhUVB+D95d1F84vj7PeSxo8TkPMQTKvEuJQ7AjViyDUg1XxmZnu0hzdyjrbP08WvKgzOFoM8So=
-  app: travel-time
+  app: cartora
   on:
     repo: millingab/cartora
   run: "rake db:migrate"
