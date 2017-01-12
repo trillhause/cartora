@@ -11,6 +11,7 @@ class User < ApplicationRecord
   has_many :attending, -> { where(attending: true) }, :class_name => 'Participation'
   has_many :invited, -> { where(attending: false) }, :class_name => 'Participation'
   has_many :hosting, class_name: 'Event', foreign_key: :host_id, dependent: :destroy
+  has_one :location, as: :area, dependent: :destroy
 
   def generate_authentication_token!
     begin

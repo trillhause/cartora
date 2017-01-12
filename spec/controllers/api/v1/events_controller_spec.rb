@@ -79,7 +79,7 @@ RSpec.describe Api::V1::EventsController, type: :controller do
         @user = FactoryGirl.create :user
         p1 = FactoryGirl.create :user
         p2 = FactoryGirl.create :user
-        @event_attributes = FactoryGirl.attributes_for :event, participants: [ {id: p1.id} ,{id: p2.id} ]
+        @event_attributes = FactoryGirl.attributes_for :event, location: {lat: -32.2322, lng: 12.232}, participants: [ {id: p1.id} ,{id: p2.id} ]
         api_authorization_header @user.auth_token
         post :create, params: @event_attributes.merge(user_id: @user.id)
       end
@@ -98,7 +98,7 @@ RSpec.describe Api::V1::EventsController, type: :controller do
     context 'when is successfully created without participants' do
       before :each do
         @user = FactoryGirl.create :user
-        @event_attributes = FactoryGirl.attributes_for :event
+        @event_attributes = FactoryGirl.attributes_for :event, location: {lat: -32.2322, lng: 12.232}
         api_authorization_header @user.auth_token
         post :create, params: @event_attributes.merge(user_id: @user.id)
       end
@@ -113,7 +113,7 @@ RSpec.describe Api::V1::EventsController, type: :controller do
     context 'when is not created' do
       before :each do
         @user = FactoryGirl.create :user
-        @invalid_event_attributes = { name: "test", start_time: "invalid", end_time: "invalid" }
+        @invalid_event_attributes = { name: "test", start_time: "invalid", end_time: "invalid", location: {lat: -32.2322, lng: 12.232} }
         api_authorization_header @user.auth_token
         post :create, params: @invalid_event_attributes.merge(user_id: @user.id)
       end

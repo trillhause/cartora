@@ -1,5 +1,5 @@
 class Api::V1::EventsController < ApplicationController
-  before_action :authenticate_with_token!, only: [:show, :index, :create, :update, :destroy]
+  before_action :authenticate_with_token!
 
   def show
     render json: Event.find(params[:id]),
@@ -29,8 +29,9 @@ class Api::V1::EventsController < ApplicationController
 
   def create
     event = current_user.hosting.build(event_params)
-    if event.save
+    location = event.build_location(location_params)
 
+    if event.save && location.save
       params[:participants].each do |user|
         event.participations.build(user_id: user[:id]).save
       end unless params[:participants].nil?
@@ -40,7 +41,7 @@ class Api::V1::EventsController < ApplicationController
              location: api_user_event_path(current_user, event),
              serializer: EventWithParticipantsSerializer
     else
-      render json: { errors: event.errors },
+      render json: { errors: event.errors, location_errors: location.errors},
              status: :unprocessable_entity
     end
   end
@@ -52,6 +53,14 @@ class Api::V1::EventsController < ApplicationController
     params[:participants].each do |user|
       event.participations.build(user_id: user[:id]).save
     end unless params[:participants].nil?
+
+    if params[:location]
+      unless event.location.update(location_params)
+        render json: { errors: event.location.errors },
+               status: :unprocessable_entity
+        return
+      end
+    end
 
     if event.update(event_params)
       render json: event,
@@ -74,5 +83,9 @@ class Api::V1::EventsController < ApplicationController
 
   def event_params
     params.permit(:name,:start_time,:end_time)
+  end
+
+  def location_params
+    params.require(:location).permit(:lat, :lng)
   end
 end
