@@ -4,8 +4,8 @@ class CreateEvents < ActiveRecord::Migration[5.0]
       t.string :name, null: false
       t.integer :host_id, null: false
       t.index :host_id
-      t.time :start_time, null: false
-      t.time :end_time, null: false
+      t.integer :start_time, null: false
+      t.integer :end_time, null: false
 
       t.timestamps
     end
