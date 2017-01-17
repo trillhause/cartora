@@ -15,6 +15,7 @@ RSpec.describe Event, type: :model do
   it { should validate_presence_of :end_time }
   it { should be_valid }
 
+  it { should have_one(:location) }
   it { should belong_to(:host).class_name('User').with_foreign_key('host_id') }
 
   describe 'when start_time is after end_time' do

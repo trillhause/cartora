@@ -7,7 +7,8 @@ class Api::V1::LocationsController < ApplicationController
              serializer: LocationsSerializer,
              status: :ok
     else
-      render json: { errors: "no location for this event yet" }
+      render json: { errors: "no location for this event yet" },
+             status: :unprocessable_entity
     end
   end
 
@@ -25,12 +26,15 @@ class Api::V1::LocationsController < ApplicationController
              location: api_user_location_path(current_user, location),
              each_serializer: UserLocationSerializer
     else
-      render json: { errors: "Event with id #{params[:event_id]} does not exist"}
+      render json: { errors: "Event with id #{params[:event_id]} does not exist"},
+             status: :unprocessable_entity
+
     end
   end
 
   def create_user_location
-    return render json: { errors: "Location already exists, do a PUT to update location"} if current_user.location
+    return render json: { errors: "Location already exists, do a PUT to update location"},
+                  status: :unprocessable_entity if current_user.location
     location = current_user.build_location(location_params)
     if location.save
       render json: location,
@@ -67,14 +71,16 @@ class Api::V1::LocationsController < ApplicationController
                  location: api_user_location_path(current_user, location),
                  each_serializer: UserLocationSerializer
         else
-          render json: { errors: "Event with id #{params[:event_id]} does not exist"}
+          render json: { errors: "Event with id #{params[:event_id]} does not exist"},
+                 status: :unprocessable_entity
         end
       else
         render json: { errors: location.errors },
                status: :unprocessable_entity
       end
     else
-      render json: { errors: "Please enable location services"}
+      render json: { errors: "Please enable location services"},
+             status: :unprocessable_entity
     end
   end
 
