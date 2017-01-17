@@ -32,7 +32,7 @@ RSpec.describe Api::V1::LocationsController, type: :controller do
 
     it { should respond_with :ok }
   end
-  
+
   describe 'GET #show_location_of_users_for_event' do
     context 'when successfully gets the result' do
       before :each do
