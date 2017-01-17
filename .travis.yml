@@ -23,4 +23,5 @@ deploy:
   run: "rake db:migrate"
 
 notifications:
-  slack: travel-time:ShZgu6cz2iPyVLKlTEinHgqH
+  email: false
+  slack: cartora:ShZgu6cz2iPyVLKlTEinHgqH

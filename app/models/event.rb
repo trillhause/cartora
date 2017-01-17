@@ -9,6 +9,7 @@ class Event < ApplicationRecord
   has_many :attending, -> { where(attending: true) }, :class_name => 'Participation'
   has_many :invited, -> { where(attending: false) }, :class_name => 'Participation'
   belongs_to :host, class_name: 'User', foreign_key: :host_id
+  has_one :location, as: :area, dependent: :destroy
 
   private
 

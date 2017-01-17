@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161203203615) do
+ActiveRecord::Schema.define(version: 20170104185528) do
 
   create_table "events", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name",       null: false
@@ -20,6 +20,16 @@ ActiveRecord::Schema.define(version: 20161203203615) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["host_id"], name: "index_events_on_host_id", using: :btree
+  end
+
+  create_table "locations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.decimal  "lat",        precision: 10, scale: 6, null: false
+    t.decimal  "lng",        precision: 10, scale: 6, null: false
+    t.string   "area_type",                           null: false
+    t.integer  "area_id",                             null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.index ["area_type", "area_id"], name: "index_locations_on_area_type_and_area_id", using: :btree
   end
 
   create_table "participations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

@@ -17,17 +17,24 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def update
-    user = current_user
-    if user.update(user_params)
-      render json: user, status: :ok, location: [:api, user]
+    if current_user == User.find_by(id: params[:id])
+      if current_user.update(user_params)
+        render json: current_user, status: :ok, location: [:api, current_user]
+      else
+        render json: {errors: current_user.errors }, status: :unprocessable_entity
+      end
     else
-      render json: {errors: user.errors }, status: :unprocessable_entity
+      render json: { errors: "Not authenticated" }, status: :unauthorized
     end
   end
 
   def destroy
-    current_user.destroy
-    head :no_content
+    if current_user == User.find_by(id: params[:id])
+      current_user.destroy
+      head :no_content
+    else
+      render json: { errors: "Not authenticated" }, status: :unauthorized
+    end
   end
 
   private
