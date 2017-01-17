@@ -20,8 +20,8 @@ RSpec.describe Event, type: :model do
 
   describe 'when start_time is after end_time' do
     before do
-      event.start_time = "2016-11-13 14:39:19"
-      event.end_time = "2016-11-13 13:39:19"
+      event.start_time = "1483228800"
+      event.end_time = "1480550400"
     end
     it { should be_invalid }
   end

@@ -10,13 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170104185528) do
+ActiveRecord::Schema.define(version: 20170117052333) do
 
   create_table "events", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name",       null: false
     t.integer  "host_id",    null: false
-    t.time     "start_time", null: false
-    t.time     "end_time",   null: false
+    t.integer  "start_time", null: false
+    t.integer  "end_time",   null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["host_id"], name: "index_events_on_host_id", using: :btree
