@@ -2,4 +2,4 @@
 
 Cartora is an location-based event planning application.
 
-All information about the cartora REST Api can be found here
+All information about the cartora REST API can be found here
