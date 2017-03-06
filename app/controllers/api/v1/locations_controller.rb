@@ -48,16 +48,20 @@ class Api::V1::LocationsController < ApplicationController
   end
 
   def update_user_location
-    if location = current_user.location
-      if location.update(location_params)
-        render json: location,
-               status: :ok,
-               location: api_user_location_path(current_user, location),
-               serializer: LocationsSerializer
-      else
-        render json: { errors: location.errors },
-               status: :unprocessable_entity
-      end
+    if current_user.location
+      location = current_user.location
+    else
+      location = current_user.build_location(location_params)
+    end
+
+    if location.update(location_params)
+      render json: location,
+             status: :ok,
+             location: api_user_location_path(current_user, location),
+             serializer: LocationsSerializer
+    else
+      render json: { errors: location.errors },
+             status: :unprocessable_entity
     end
   end
 

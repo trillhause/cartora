@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: :json }, path: '/'  do
     scope module: :v1, constraints: ApiConstraints.new(version: 1, default: true) do
       # We are going to list our resources here
+      match 'notif', to: 'users#send_push', via: :post
       resources :users, only: [:show, :create, :update, :destroy] do
         resources :events, only: [:show, :create, :update, :destroy] do
           match 'location', to: 'locations#update_user_location_with_response', via: :put

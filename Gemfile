@@ -9,7 +9,7 @@ gem 'active_model_serializers'
 gem 'rack-cors'
 gem 'rb-readline'
 gem 'devise'
-
+gem 'fcm'
 gem 'yaml_db'
 
 group :development, :test do
