@@ -4,7 +4,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable
   validates :auth_token, uniqueness: true
   validates :first_name, :last_name, presence: true
+  validates :fcm_id, presence: true
   before_create :generate_authentication_token!
+
 
   has_many :events, through: :participations
   has_many :participations, dependent: :destroy

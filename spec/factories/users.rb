@@ -6,6 +6,7 @@ FactoryGirl.define do
     email { FFaker::Internet.email }
     password "12345678"
     password_confirmation "12345678"
+    fcm_id "Ju5tATe5T1D"
 
     after(:create) do |user|
       create(:location, area: user)
