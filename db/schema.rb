@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170104185528) do
+ActiveRecord::Schema.define(version: 20170306193849) do
 
   create_table "events", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name",       null: false
@@ -57,6 +57,7 @@ ActiveRecord::Schema.define(version: 20170104185528) do
     t.string   "auth_token",             default: ""
     t.string   "first_name"
     t.string   "last_name"
+    t.string   "fcm_id",                              null: false
     t.index ["auth_token"], name: "index_users_on_auth_token", unique: true, using: :btree
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
