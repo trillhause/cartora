@@ -60,10 +60,15 @@ GEM
     factory_girl_rails (4.7.0)
       factory_girl (~> 4.7.0)
       railties (>= 3.0.0)
+    fcm (0.0.2)
+      httparty
+      json
     ffaker (2.3.0)
     ffi (1.9.14)
     globalid (0.3.7)
       activesupport (>= 4.1.0)
+    httparty (0.14.0)
+      multi_xml (>= 0.5.2)
     i18n (0.7.0)
     json (1.8.3)
     jsonapi (0.1.1.beta2)
@@ -81,6 +86,7 @@ GEM
     mime-types-data (3.2016.0521)
     mini_portile2 (2.1.0)
     minitest (5.10.1)
+    multi_xml (0.6.0)
     mysql2 (0.4.5)
     nio4r (1.2.1)
     nokogiri (1.6.8.1)
@@ -175,6 +181,7 @@ DEPENDENCIES
   byebug
   devise
   factory_girl_rails
+  fcm
   ffaker
   listen (~> 3.0.5)
   mysql2

@@ -1,3 +1,5 @@
+require 'fcm'
+
 class Api::V1::UsersController < ApplicationController
   before_action :authenticate_with_token!, only: [:update, :destroy]
   respond_to :json
@@ -35,6 +37,14 @@ class Api::V1::UsersController < ApplicationController
     else
       render json: { errors: "Not authenticated" }, status: :unauthorized
     end
+  end
+
+  def send_push
+    fcm = FCM.new("AAAAZ3gGsj4:APA91bEpMYJjti5khYaWrhzDmz5SHhu9u_JqZIK7Ua5zK7Z1O1cyVcp9ieYVlmH23vU32oVBr-xNF3eowkb-y-YHaPgnzAxMw0kahnhdAXqIqtDh1L6kla2aFQKE2gjkLKOTT2azeLyI")
+
+    registration_ids= ["dJrliMHhmYg:APA91bErqVvFRyLYwbG2LQXCoQKyV81wcIUnj6LLLtrDBLpMk3UWHU2oHUH-MLG2a_HlC8CM0Ur9IORunhSI-FBYUZr-AYSjXDGsf5YRqanSiuhzGicDl18bT6mjFc_cj_gPpVHHfK-a", "dsbLRpLyXgM:APA91bFkw7i-EWPgWXavSvaZgU_Gui4LklclXl9Wxqfmu4tfYbchBndwnQad9yWexW-jsDCHt9s68_HygWF7Nwf4mMUvQGwpNYtk0hgtTD2b_BUM9JCUYrGBfNVuGxQA6FMFlSYTeQmk"] # an array of one or more client registration tokens
+    options = {data: {score: "Test Notifaction"}, collapse_key: "Cartora successfully sent its first Notification"}
+    response = fcm.send(registration_ids, options)
   end
 
   private
