@@ -14,8 +14,6 @@ RSpec.describe User, type: :model do
 
   it { should be_valid }
   it { should validate_uniqueness_of :auth_token }
-  it { should validate_presence_of :first_name }
-  it { should validate_presence_of :last_name }
 
   it { should have_one(:location) }
   it { should have_many(:hosting) }
@@ -28,15 +26,15 @@ RSpec.describe User, type: :model do
     it { should allow_value('example@domain.com').for(:email) }
   end
 
-  describe "#generate_authentication_token!" do
-    it "generates a unique token" do
-      allow(Devise).to receive(:friendly_token).and_return("auniquetoken123")
+  describe '#generate_authentication_token!' do
+    it 'generates a unique token' do
+      allow(Devise).to receive(:friendly_token).and_return('auniquetoken123')
       @user.generate_authentication_token!
-      expect(@user.auth_token).to eql "auniquetoken123"
+      expect(@user.auth_token).to eql 'auniquetoken123'
     end
 
     it 'generates another token when one already has been taken' do
-      existing_user = FactoryGirl.create(:user, auth_token: "anuniquetoken123")
+      existing_user = FactoryGirl.create(:user, auth_token: 'anuniquetoken123')
       @user.generate_authentication_token!
       expect(@user.auth_token).not_to eql existing_user.auth_token
     end

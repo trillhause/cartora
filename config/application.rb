@@ -36,6 +36,9 @@ module Traveltime
     end
 
     config.active_record.time_zone_aware_types = [:datetime, :time]
+    config.active_job.queue_name_prefix = Rails.env
 
+    FIREBASE_KEY = "AAAAZ3gGsj4:APA91bEpMYJjti5khYaWrhzDmz5SHhu9u_JqZIK7Ua5zK7Z1O1cyVcp9ieYVlmH23vU32oVBr-xNF3eowkb-y-YHaPgnzAxMw0kahnhdAXqIqtDh1L6kla2aFQKE2gjkLKOTT2azeLyI"
+    GCM = FCM.new(FIREBASE_KEY)
   end
 end

@@ -18,6 +18,7 @@ Rails.application.routes.draw do
         get 'location', to: 'locations#show_user_location', as: :location
         match 'location', to: 'locations#create_user_location', via: :post
         match 'location', to: 'locations#update_user_location', via: :put
+        match 'fcm', to: 'users#update_fcm', via: :put
       end
       resources :sessions, only: [:create, :destroy]
       resources :events, only: [] do

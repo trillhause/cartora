@@ -1,3 +1,5 @@
+require 'securerandom'
+
 module Authenticable
 
   # Devise methods overwrites
@@ -11,5 +13,9 @@ module Authenticable
 
   def user_signed_in?
     current_user.present?
+  end
+
+  def generate_random_password
+    SecureRandom.hex[0,8]
   end
 end

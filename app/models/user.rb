@@ -3,8 +3,6 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable
   validates :auth_token, uniqueness: true
-  validates :first_name, :last_name, presence: true
-  validates :fcm_id, presence: true
   before_create :generate_authentication_token!
 
 
