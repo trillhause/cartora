@@ -37,5 +37,7 @@ module Traveltime
 
     config.active_record.time_zone_aware_types = [:datetime, :time]
 
+    config.active_job.queue_name_prefix = Rails.env
+
   end
 end

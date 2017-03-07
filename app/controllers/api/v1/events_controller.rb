@@ -32,14 +32,14 @@ class Api::V1::EventsController < ApplicationController
     location = event.build_location(location_params)
 
     if event.save && location.save
-      params[:participants].each do |user|
-        event.participations.build(user_id: user[:id]).save
-      end unless params[:participants].nil?
+      params[:invite].each do |param|
+        EventInvitationJob.perform_now(param[:email],event)
+      end unless params[:invite].nil?
 
       render json: event,
              status: :created,
              location: api_user_event_path(current_user, event),
-             serializer: EventWithParticipantsSerializer
+             serializer: EventSerializer
     else
       render json: { errors: event.errors, location_errors: location.errors},
              status: :unprocessable_entity
