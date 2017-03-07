@@ -39,6 +39,18 @@ class Api::V1::UsersController < ApplicationController
     end
   end
 
+  def update_fcm
+    if current_user == User.find_by(id: params[:user_id])
+      if current_user.update(params.permit(:fcm_id))
+        render json: {fcm_id: current_user.fcm_id}, status: :ok
+      else
+        render json: {errors: current_user.errors }, status: :unprocessable_entity
+      end
+    else
+      render json: { errors: "Not authenticated" }, status: :unauthorized
+    end
+  end
+
   def send_push
     fcm = FCM.new("AAAAZ3gGsj4:APA91bEpMYJjti5khYaWrhzDmz5SHhu9u_JqZIK7Ua5zK7Z1O1cyVcp9ieYVlmH23vU32oVBr-xNF3eowkb-y-YHaPgnzAxMw0kahnhdAXqIqtDh1L6kla2aFQKE2gjkLKOTT2azeLyI")
 
